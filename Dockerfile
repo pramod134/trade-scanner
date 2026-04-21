@@ -3,9 +3,13 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+
+# install ALL deps including dev (needed for vite build)
+RUN npm ci --include=dev
 
 COPY . .
+
+# build frontend
 RUN npm run build
 
 ENV NODE_ENV=production
