@@ -10,6 +10,22 @@ const STRAT_META = {
   EQ_SQUEEZE: { label: "EQ Squeeze", color: "#f472b6", icon: "⊕" },
 };
 
+const TF_COLOR = {
+  "1w": "#9333ea",
+  "1d": "#ec4899",
+  "1h": "#f97316",
+  "15m": "#3b82f6",
+  "5m": "#22c55e",
+  "3m": "#14b8a6",
+  "1m": "#64748b",
+};
+
+const TRADE_TYPE_COLOR = {
+  SWING: "#a78bfa",
+  DAY: "#f97316",
+  SCALP: "#22c55e",
+};
+
 function ScoreBar({ score, max = 100 }) {
   const pct = Math.min((score / max) * 100, 100);
   const color = score >= 85 ? "#22c55e" : score >= 70 ? "#f97316" : "#64748b";
