@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { TF_WEIGHT } from "./shared/scannerCore";
+import { STRAT_META } from "./shared/scannerCore.js";
 
 function ScoreBar({ score, max = 100 }) {
   const pct = Math.min((score / max) * 100, 100);
