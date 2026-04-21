@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # install ALL deps including dev (needed for vite build)
-RUN npm ci --include=dev
+RUN npm install
 
 COPY . .
 
