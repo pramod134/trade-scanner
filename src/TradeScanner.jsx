@@ -230,7 +230,7 @@ export default function TradeScanner({ defaultSymbol = "SPY" }) {
       setSignals(payload.signals ?? []);
       setBias(payload.bias ?? null);
       setSource(payload.source ?? "server");
-      setLastScan(payload.scannedAt ? new Date(payload.scannedAt) : new Date());
+      setLastScan(payload.scannedAt ? new Date(payload.scannedAt) : null);
       setScanCount((c) => c + 1);
     } catch (err) {
       console.error("Dashboard fetch failed:", err);
@@ -306,7 +306,7 @@ export default function TradeScanner({ defaultSymbol = "SPY" }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ textAlign: "right" }}>
             <div style={{ fontSize: 10, color: "#475569" }}>
-              {lastScan ? `Last: ${lastScan.toLocaleTimeString()}` : "—"}
+              {lastScan instanceof Date ? `Last: ${lastScan.toLocaleTimeString()}` : "—"}
             </div>
             <div style={{ fontSize: 10, color: "#334155" }}>Refresh #{scanCount}</div>
           </div>
