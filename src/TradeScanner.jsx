@@ -50,6 +50,7 @@ function SignalCard({ signal, index }) {
   const [expanded, setExpanded] = useState(false);
   const meta = STRAT_META[signal.strategy] || { label: signal.strategy, color: "#94a3b8", icon: "○" };
   const isLong = signal.direction === "LONG";
+  const signalTime = signal.timestamp ? new Date(signal.timestamp) : null;
 
   return (
     <div
@@ -132,6 +133,14 @@ function SignalCard({ signal, index }) {
         <span style={{ fontSize: 10, color: "#4ade80" }}>T1: {signal.rr1}R</span>
         <span style={{ fontSize: 10, color: "#86efac" }}>T2: {signal.rr2}R</span>
         <span style={{ fontSize: 10, color: "#64748b", marginLeft: "auto" }}>RSI {signal.rsi?.toFixed(0)}</span>
+      </div>
+
+      <div style={{ display: "flex", gap: 6, marginTop: 6, flexWrap: "wrap" }}>
+        <span style={{ fontSize: 10, color: "#64748b" }}>
+          Signal data: {signalTime instanceof Date && !Number.isNaN(signalTime.getTime())
+            ? signalTime.toLocaleString()
+            : "—"}
+        </span>
       </div>
 
       {/* Expanded detail */}
@@ -332,7 +341,7 @@ export default function TradeScanner({ defaultSymbol = "SPY" }) {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ textAlign: "right" }}>
             <div style={{ fontSize: 10, color: "#475569" }}>
-              {lastScan instanceof Date ? `Last: ${lastScan.toLocaleTimeString()}` : "—"}
+              {lastScan instanceof Date ? `Scanned: ${lastScan.toLocaleString()}` : "—"}
             </div>
             <div style={{ fontSize: 10, color: "#334155" }}>Refresh #{scanCount}</div>
           </div>
