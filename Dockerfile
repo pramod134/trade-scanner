@@ -4,12 +4,14 @@ WORKDIR /app
 
 COPY package*.json ./
 
-# install ALL deps including dev (needed for vite build)
+# upgrade npm to avoid the broken bundled version
+RUN npm install -g npm@11
+
+# install dependencies, including devDependencies like vite
 RUN npm install
 
 COPY . .
 
-# build frontend
 RUN npm run build
 
 ENV NODE_ENV=production
