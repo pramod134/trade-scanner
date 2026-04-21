@@ -90,8 +90,22 @@ app.get("/api/dashboard", async (req, res) => {
 });
 
 if (isProd) {
-  app.use(express.static(distDir));
-  app.get(/^(?!\/api).*/, (_req, res) => {
+  app.use(express.static(distDir, {
+    etag: true,
+    maxAge: "1y",
+    index: false,
+  }));
+
+  app.get(/^(?!\/api).*/, (req, res) => {
+    // Avoid returning index.html for missing static assets (e.g. stale hashed JS bundles).
+    if (path.extname(req.path)) {
+      return res.status(404).json({ error: "Asset not found" });
+    }
+
+    // Always revalidate HTML so clients do not get stuck with stale asset references.
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
     res.sendFile(path.join(distDir, "index.html"));
   });
 } else {
