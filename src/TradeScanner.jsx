@@ -1,6 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { TF_WEIGHT } from "./shared/scannerCore";
-import { STRAT_META } from "./shared/scannerCore.js";
+
+const STRAT_META = {
+  FVG_RETEST: { label: "FVG Retest", color: "#00d4ff", icon: "◈" },
+  LIQ_SWEEP: { label: "Liq Sweep", color: "#ff6b35", icon: "◉" },
+  BOS_PULLBACK: { label: "BOS Pullback", color: "#a78bfa", icon: "◆" },
+  VWAP_FADE: { label: "VWAP Fade", color: "#fbbf24", icon: "◎" },
+  LVN_BREAKOUT: { label: "LVN Breakout", color: "#34d399", icon: "▲" },
+  EQ_SQUEEZE: { label: "EQ Squeeze", color: "#f472b6", icon: "⊕" },
+};
 
 function ScoreBar({ score, max = 100 }) {
   const pct = Math.min((score / max) * 100, 100);
