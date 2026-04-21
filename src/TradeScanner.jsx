@@ -235,7 +235,7 @@ export default function TradeScanner({ defaultSymbol = "SPY" }) {
   const [source, setSource] = useState("server");
 
   const fetchDashboard = useCallback(async () => {
-    const res = await fetch(`/api/dashboard?symbol=${encodeURIComponent(symbol)}`);
+    const res = await fetch(`https://trade-scanner-production-47fd.up.railway.app/api/dashboard?symbol=${symbol}`);
     if (!res.ok) {
       let message = `Request failed (${res.status})`;
       try {
