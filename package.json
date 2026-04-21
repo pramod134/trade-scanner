@@ -11,7 +11,7 @@
     "dev:client": "vite",
     "dev:server": "nodemon server.js",
     "build": "vite build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
