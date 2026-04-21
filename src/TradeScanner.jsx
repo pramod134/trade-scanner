@@ -227,7 +227,7 @@ export default function TradeScanner({ defaultSymbol = "SPY" }) {
     setError("");
     try {
       const payload = await fetchDashboard();
-      setSignals(payload.signals ?? []);
+      setSignals(Array.isArray(payload.signals) ? payload.signals : []);
       setBias(payload.bias ?? null);
       setSource(payload.source ?? "server");
       setLastScan(payload.scannedAt ? new Date(payload.scannedAt) : null);
@@ -236,6 +236,7 @@ export default function TradeScanner({ defaultSymbol = "SPY" }) {
       console.error("Dashboard fetch failed:", err);
       setSignals([]);
       setBias(null);
+      setLastScan(null);
       setError(err?.message || "Unable to load scanner data.");
     } finally {
       setIsScanning(false);
